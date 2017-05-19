@@ -4,10 +4,10 @@
 
 * Visual Studio 2017
 * SQL Server 2016 Express
-    * aspnetdb
-        Membership(aspnet_regsql.exe)
-    * decodedon
-        デモ用
+    * aspnetdb  
+      Membership(aspnet_regsql.exe)
+    * decodedon  
+      デモ用
 ```
 CREATE TABLE [dbo].[Toots]
 (
@@ -20,11 +20,11 @@ CREATE TABLE [dbo].[Toots]
 
 ## ソリューション
 
-* decodedon.v35
+* decodedon.v35  
     .NET3.5で作成したソリューション    
-* decodedon.v35_v46_complete
+* decodedon.v35_v46_complete  
     .NET3.5でを.NET4.6.2に移行したソリューション    
-* decodedon.v46
+* decodedon.v46  
     .NET4.6.2で作成したソリューション    
-* decodedon.complete
+* decodedon.complete  
     スタイルを適用した完成版
