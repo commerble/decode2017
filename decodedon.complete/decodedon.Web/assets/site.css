@@ -1,0 +1,40 @@
+﻿body {
+    background-image: url(decodedon.png);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:30%;
+}
+
+.tootbox {
+    padding:10pt;
+    background-color: #606060;
+}
+
+.timeline {
+    border: 0;
+    background-color: #303030;
+    min-width: 100%;
+}
+
+    .timeline tr {
+        margin: 10px;
+        display: block;
+        border-bottom: 1px solid #505050;
+    }
+
+    .timeline td {
+        display: block;
+        white-space: normal !important;
+        word-wrap: break-word;
+    }
+
+        .timeline td.date {
+            margin-top: -1.5em;
+            text-align: right;
+            color:gray;
+        }
+
+        .timeline td.toot {
+            margin: 12px;
+        }
