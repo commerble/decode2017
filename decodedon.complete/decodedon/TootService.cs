@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Threading;
 
 namespace decodedon
 {
@@ -35,8 +34,6 @@ namespace decodedon
 
         public IEnumerable<Toot> Load(bool hasFederated, int take = int.MaxValue)
         {
-            var sync = new object();
-            var toots = new List<Toot>();
             var accessors = new List<ITootAccessor>
             {
                 new TootLocal()
@@ -44,16 +41,19 @@ namespace decodedon
 
             if (hasFederated)
                 accessors.AddRange(_federates.Select(f => new TootRemote(f) as ITootAccessor));
-
+#if NET35
+            var sync = new object();
+            var toots = new List<Toot>();
             var counter = accessors.Count;
-            var wait = new AutoResetEvent(false);
+            var wait = new System.Threading.AutoResetEvent(false);
+            
             foreach (var accessor in accessors)
             {
-                ThreadPool.QueueUserWorkItem(acs =>
+                System.Threading.ThreadPool.QueueUserWorkItem(acs =>
                 {
                     var loaded = (acs as ITootAccessor).Load(take);
 
-                    Interlocked.Decrement(ref counter);
+                    System.Threading.Interlocked.Decrement(ref counter);
                     lock (sync)
                     {
                         if (loaded != null)
@@ -65,7 +65,17 @@ namespace decodedon
                 }, accessor);
             }
             wait.WaitOne();
-
+#else
+            var toots = new System.Collections.Concurrent.ConcurrentBag<Toot>();
+            var tasks = accessors.Select(acs => System.Threading.Tasks.Task.Factory.StartNew(() =>
+            {
+                var loaded = (acs as ITootAccessor).Load(take);
+                if (loaded != null)
+                    foreach (var t in loaded)
+                        toots.Add(t);
+            }));
+            System.Threading.Tasks.Task.WaitAll(tasks.ToArray());
+#endif
             return toots.OrderByDescending(t => t.CreateAt).ThenBy(t => t.IsRemote);
         }
 
