@@ -22,9 +22,9 @@ CREATE TABLE [dbo].[Toots]
 
 * decodedon.v35  
     .NET3.5で作成したソリューション    
-* decodedon.v35_v46_complete  
-    .NET3.5でを.NET4.6.2に移行したソリューション    
 * decodedon.v46  
     .NET4.6.2で作成したソリューション    
+* decodedon.demo_complete  
+    デモで.NET3.5を.NET4.6.2に移行したソリューション    
 * decodedon.complete  
     スタイルを適用した完成版
