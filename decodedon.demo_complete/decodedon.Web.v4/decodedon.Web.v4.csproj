@@ -101,7 +101,7 @@
     </Compile>
     <Compile Include="..\decodedon.Web\Api\Federate.svc.cs">
       <DependentUpon>Federate.svc</DependentUpon>
-      <Link>Api\Federate.aspx</Link>
+      <Link>Api\Federate.svc.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\decodedon.Web\Site.Master.cs">
